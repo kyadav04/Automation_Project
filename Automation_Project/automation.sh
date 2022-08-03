@@ -41,3 +41,16 @@ aws s3 \
 cp /tmp/${kanishk}-httpd-logs-$ {(date '+%d%m%Y-%H%M%S')}.tar \
 s3://$ {upgrad-kanishkyadav}/${kanishk}-httpd-logs-$ {(date '+%d%m%Y-%H%M%S')}.tar
 
+#Cron Job
+
+CRON='/etc/cron.d/automation' if test -f "$CRON" then
+    echo "cron exists" else
+    touch $CRON
+    echo "SHELL=/bin/bash" > $CRON
+    echo 
+"PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin" >> 
+$CRON
+    echo "0 20 * * * root /root/Automation_Project/automation.sh" >> 
+$CRON
+fi
+
